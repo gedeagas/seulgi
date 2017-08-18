@@ -14,26 +14,25 @@ export const handler = (data) => {
     let pageID = data.recipient.id;
     let timeOfMessage = data.timestamp;
     let message = data.message;
-    let senderName = "";
+    let userProfile = "";
 
     let readableMessage = message.text;    
-    let lang = franc(readableMessage, {blacklist: ['src', 'zlm']});
+    let lang = franc(readableMessage, {blacklist: ['src', 'zlm'], minLength: 3});
     
     console.log("[receivedMessage] user (%d) page (%d) timestamp (%d) and message (%s)", 
     senderID, pageID, timeOfMessage, JSON.stringify(message));
-    
+    f
     
 
     messenger.getProfile(senderID, function (err, body) {
-        if(err) return console.error(err)
-        console.log(body)
+        userProfile = body;
     });
 
     if(lang == "eng") {
         messenger.sendTextMessage(senderID, 'English');
         
     } else if (lang == "ind") {
-        messenger.sendTextMessage(senderID, 'Maaf , bahasa indonesia ku belum bagus');
+        messenger.sendTextMessage(senderID, 'Maaf ${userProfile.first_name}!, bahasa indonesia ku belum bagus');
         
     }
 }
