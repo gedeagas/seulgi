@@ -17,7 +17,7 @@ export const handler = (data) => {
     let userProfile = "";
 
     let readableMessage = message.text;    
-    let lang = franc(readableMessage, {blacklist: ['src', 'zlm'], minLength: 3});
+    let lang = franc(readableMessage, {minLength: 3,whitelist: ['eng', 'ind']});
     
     console.log("[receivedMessage] user (%d) page (%d) timestamp (%d) and message (%s)", 
     senderID, pageID, timeOfMessage, JSON.stringify(message));
