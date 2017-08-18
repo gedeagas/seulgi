@@ -15,7 +15,7 @@ export const handler = (data) => {
     let timeOfMessage = data.timestamp;
     let message = data.message;
     let senderName = "";
-
+    console.log(message);
     let lang = franc(message, {blacklist: ['src', 'zlm']});
     
     console.log("[receivedMessage] user (%d) page (%d) timestamp (%d) and message (%s)", 
