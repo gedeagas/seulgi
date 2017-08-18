@@ -14,6 +14,15 @@
   "author": "Agastya Darma Laksana",
   "license": "MIT",
   "dependencies": {
-    "natural": "^0.5.4"
+    "apiai": "^4.0.3",
+    "body-parser": "^1.17.2",
+    "config": "^1.26.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "fb-messenger": "^1.1.0",
+    "franc": "^3.1.1",
+    "natural": "^0.5.4",
+    "python-shell": "^0.4.0",
+    "request": "^2.81.0"
   }
 }
