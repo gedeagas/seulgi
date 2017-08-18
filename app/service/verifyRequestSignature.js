@@ -11,7 +11,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-const crypto = require('crypto'),
+const crypto = require('crypto');
 
 export default function verifyRequestSignature(req, res, buf) {
     var signature = req.headers["x-hub-signature"];
