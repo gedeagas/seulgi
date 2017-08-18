@@ -1,4 +1,4 @@
-const config = require('config'),
+const config = require('config');
 
 // Generate a page access token for your page from the App Dashboard
 const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
