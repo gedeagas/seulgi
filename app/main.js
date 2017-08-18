@@ -12,6 +12,7 @@
  *
  */
 "use strict";
+import handler from './module/handler';
 
 export const processor = (req, res) => {
     let data = req.body;
@@ -31,7 +32,7 @@ export const processor = (req, res) => {
             
             if (messagingEvent.message) {
                 // someone sent a message
-                receivedMessage(messagingEvent);
+                handler(messagingEvent);
     
             } else {
                 console.log("[app.post] Webhook is not prepared to handle this message.");

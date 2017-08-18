@@ -8,7 +8,7 @@ config.get('pageAccessToken');
 let FBMessenger = require('fb-messenger');
 let messenger = new FBMessenger(PAGE_ACCESS_TOKEN);
 
-export default handler = (data) => {
+export const handler = (data) => {
     let senderID = data.sender.id;
     let pageID = data.recipient.id;
     let timeOfMessage = data.timestamp;
@@ -19,3 +19,5 @@ export default handler = (data) => {
 
     messenger.sendTextMessage(senderID, 'Diterima Cuy');
 }
+
+export default handler;
