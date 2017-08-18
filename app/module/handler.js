@@ -21,10 +21,6 @@ export const handler = (data) => {
     
     console.log("[receivedMessage] user (%d) page (%d) timestamp (%d) and message (%s)", 
     senderID, pageID, timeOfMessage, JSON.stringify(message));
-    
-    
-
-    
 
     if(lang == "eng") {
         messenger.sendTextMessage(senderID, 'English');

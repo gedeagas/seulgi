@@ -2,7 +2,6 @@
  * Copyright 2017-present, Facebook, Inc.
  * 
  * Agastya Darma Laksana
- * agastyadarma@fb.com
  * 
  * 
  * All rights reserved.
