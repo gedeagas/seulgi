@@ -14,7 +14,6 @@
 const crypto = require('crypto');
 const config = require('config');
 
-
 /*
  * Open config/default.json and set your config values before running this code. 
  * You can also set them using environment variables.
