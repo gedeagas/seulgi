@@ -24,7 +24,7 @@ https = require('https'),
 request = require('request');
 
 //importing dependency 
-import main from './app/main';
+import processor from './app/main';
 import verifyRequestSignature from './app/service/verifyRequestSignature';
 
 let app = express();
@@ -85,4 +85,15 @@ app.get('/webhook', function(req, res) {
 * All facebook messenger incoming chat will be handled here
 *
 */
-app.post('/webhook', main.processor);
+app.post('/webhook', processor);
+
+
+/*
+ * Start server
+ * Webhooks must be available via SSL with a certificate signed by a valid 
+ * certificate authority.
+ */
+app.listen(app.get('port'), function() {
+    console.log('[app.listen] Node app is running on port', app.get('port'));
+  });
+  

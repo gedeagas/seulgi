@@ -13,7 +13,7 @@
  */
 "use strict";
 
-exports.processor = (req, res) => {
+export const processor = (req, res) => {
     let data = req.body;
     // Make sure this is a page subscription
     if (data.object == 'page') {
@@ -47,3 +47,5 @@ exports.processor = (req, res) => {
 
     }
 };
+
+export default processor;
