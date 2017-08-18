@@ -21,7 +21,7 @@ export const handler = (data) => {
     
     console.log("[receivedMessage] user (%d) page (%d) timestamp (%d) and message (%s)", 
     senderID, pageID, timeOfMessage, JSON.stringify(message));
-    f
+    
     
 
     messenger.getProfile(senderID, function (err, body) {
