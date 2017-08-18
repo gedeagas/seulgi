@@ -24,16 +24,17 @@ export const handler = (data) => {
     
     
 
-    messenger.getProfile(senderID, function (err, body) {
-        userProfile = body;
-    });
+    
 
     if(lang == "eng") {
         messenger.sendTextMessage(senderID, 'English');
         
     } else if (lang == "ind") {
-        let stringToSend = `Maaf ${userProfile.first_name}, bahasa indonesia ku belum bagus`;
-        messenger.sendTextMessage(senderID, `Maaf ${userProfile.first_name}, bahasa indonesia ku belum bagus`);
+        messenger.getProfile(senderID, function (err, body) {
+            userProfile = body;
+            messenger.sendTextMessage(senderID, `Maaf ${userProfile.first_name}, bahasa indonesia ku belum bagus`);
+            
+        });
         
     }
 }
