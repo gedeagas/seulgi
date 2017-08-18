@@ -31,7 +31,7 @@ export const handler = (data) => {
     if(lang == "eng") {
         messenger.sendTextMessage(senderID, 'English');
         
-    } else {
+    } else if (lang == "ind") {
         messenger.sendTextMessage(senderID, 'Maaf , bahasa indonesia ku belum bagus');
         
     }
