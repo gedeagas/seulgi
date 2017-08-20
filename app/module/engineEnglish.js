@@ -36,7 +36,6 @@ export default function engineEnglish(data) {
           messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response), (err, databody) => {
             if (err) return console.error(err);
             console.log(databody);
-            //really
           });
         });
       } else if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {

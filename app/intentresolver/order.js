@@ -1,7 +1,7 @@
 const faker = require('faker');
 
 export const orderFulfilment = (profile, data, response) => {
-  const todayTimestamp = +new Date();
+  const todayTimestamp = Math.floor(new Date() / 1000);
   let pricing = 0;
   const orderTimespan = response.result.contexts[1].parameters.timespan;
   if (orderTimespan === 'daily') {
