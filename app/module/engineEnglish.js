@@ -33,7 +33,38 @@ export default function engineEnglish(data) {
           const speech = response.result.fulfillment.speech;
           console.log(orderResolver(userProfile, data, response));
           messenger.sendTextMessage(senderID, `Okay ${userProfile.first_name}, ${speech}`);
-          messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response));
+          const resep = {
+            recipient_name: 'Agastya Darma',
+            order_number: '1Z46H9SAA1V4NZNPC592ZAEUZVS',
+            currency: 'IDR',
+            payment_method: 'Website',
+            order_url: 'https://www.kumpul.co/membership/join/',
+            timestamp: 1503248365495,
+            address: {
+              street_1: 'Rumah Sanur',
+              street_2: 'Jl. Danau Poso 51A Br. Semawang',
+              city: 'Sanur',
+              postal_code: '80228',
+              state: 'Bali',
+              country: 'Indonesia',
+            },
+            summary: {
+              subtotal: '200000',
+              total_tax: 0,
+              total_cost: '200000',
+            },
+            elements: [
+              {
+                title: 'Coworking Membership',
+                subtitle: 'Welcome to Kumpul Coworking Space',
+                quantity: 1,
+                price: 200000,
+                currency: 'IDR',
+                image_url: 'https://www.kumpul.co/images/beanbags.jpg',
+              },
+            ],
+          };
+          messenger.sendReceiptMessage(senderID, resep);
         });
       } else if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {
         messenger.getProfile(senderID, (err, body) => {
