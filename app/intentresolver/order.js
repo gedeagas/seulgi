@@ -17,6 +17,7 @@ export const orderFulfilment = (profile, data, response) => {
 
   const resep = {
     recipient_name: `${profile.first_name} ${profile.last_name}`,
+    merchant_name: 'Kumpul Coworking Space',
     order_number: faker.finance.bitcoinAddress(),
     currency: 'IDR',
     payment_method: 'Website',
