@@ -11,8 +11,23 @@ export default function engineEnglish(data) {
   const request = app.textRequest(data.message.text, {
     sessionId: senderID,
   });
+
+  isDefined(obj) {
+    if (typeof obj == 'undefined') {
+        return false;
+    }
+
+    if (!obj) {
+        return false;
+    }
+
+    return obj != null;
+}
+
   request.on('response', (response) => {
-    messenger.sendTextMessage(senderID, response.fulfillment.speech);
+    if (this.isDefined(response.result) && this.isDefined(response.result.fulfillment)) {
+        messenger.sendTextMessage(senderID, response.result.fulfillment.speech);
+    }        
   });
   request.on('error', (error) => {
     console.log(error);
