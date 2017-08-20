@@ -44,7 +44,7 @@ export const orderFulfilment = (profile, data, response) => {
       },
     ],
   };
-  
+  return resep;
 };
 
 export default orderFulfilment;
