@@ -26,7 +26,15 @@ export default function engineEnglish(data) {
 
   request.on('response', (response) => {
     if (isDefined(response.result) && isDefined(response.result.fulfillment)) {
-      messenger.sendTextMessage(senderID, response.result.fulfillment.speech);
+      if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {
+        messenger.getProfile(senderID, (err, body) => {
+          const userProfile = body;
+          const speech = response.result.fulfillment.speech;
+          messenger.sendTextMessage(senderID, `${speech} ${userProfile.first_name}`);
+        });
+      } else {
+        messenger.sendTextMessage(senderID, response.result.fulfillment.speech);
+      }
     }
   });
   request.on('error', (error) => {
