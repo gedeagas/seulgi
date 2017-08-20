@@ -33,7 +33,7 @@ export default function engineEnglish(data) {
           const speech = response.result.fulfillment.speech;
           console.log(orderResolver(userProfile, data, response));
           messenger.sendTextMessage(senderID, `Okay ${userProfile.first_name}, ${speech}`);
-          //messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response));
+          messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response));
         });
       } else if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {
         messenger.getProfile(senderID, (err, body) => {
