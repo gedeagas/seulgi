@@ -12,7 +12,7 @@ export const orderFulfilment = (profile, data, response) => {
 
   const resep = {
     recipient_name: profile.first_name,
-    order_number: faker.finance.bitcoinAddress,
+    order_number: faker.finance.bitcoinAddress(),
     currency: 'IDR',
     payment_method: 'Website',
     order_url: 'https://www.kumpul.co/membership/join/',
