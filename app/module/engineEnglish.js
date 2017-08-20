@@ -31,7 +31,7 @@ export default function engineEnglish(data) {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
           const speech = response.result.fulfillment.speech;
-
+          console.log(orderResolver(userProfile, data, response));
           messenger.sendTextMessage(senderID, `Okay ${userProfile.first_name}, ${speech}`);
           messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response));
         });
