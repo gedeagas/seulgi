@@ -1,5 +1,5 @@
 import { PAGE_ACCESS_TOKEN } from './token';
-import orderFulfilment from '../intentresolver/order';
+import orderResolver from '../intentresolver/order';
 
 const apiai = require('apiai');
 const FBMessenger = require('fb-messenger');
@@ -33,10 +33,9 @@ export default function engineEnglish(data) {
           const speech = response.result.fulfillment.speech;
 
           messenger.sendTextMessage(senderID, `Okay ${userProfile.first_name}, ${speech}`);
-          messenger.sendReceiptMessage(senderID, orderFulfilment(userProfile, data, response));
+          messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response));
         });
-      }
-      if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {
+      } else if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
           const speech = response.result.fulfillment.speech;
