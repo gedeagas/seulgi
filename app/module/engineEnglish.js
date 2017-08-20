@@ -12,22 +12,22 @@ export default function engineEnglish(data) {
     sessionId: senderID,
   });
 
-  isDefined(obj) {
-    if (typeof obj == 'undefined') {
-        return false;
+  function isDefined(obj) {
+    if (typeof obj === 'undefined') {
+      return false;
     }
 
     if (!obj) {
-        return false;
+      return false;
     }
 
     return obj != null;
-}
+  }
 
   request.on('response', (response) => {
-    if (this.isDefined(response.result) && this.isDefined(response.result.fulfillment)) {
-        messenger.sendTextMessage(senderID, response.result.fulfillment.speech);
-    }        
+    if (isDefined(response.result) && isDefined(response.result.fulfillment)) {
+      messenger.sendTextMessage(senderID, response.result.fulfillment.speech);
+    }
   });
   request.on('error', (error) => {
     console.log(error);
