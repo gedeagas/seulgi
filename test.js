@@ -1,4 +1,5 @@
-const franc = require('franc');
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
-const lang = franc('can i marry you', { minLength: 3, whitelist: ['eng', 'ind'] });
-console.log(lang);
+console.log(getRandomArbitrary(1000, 2000));

@@ -1,9 +1,7 @@
-export const orderFulfilment = (profile, data, response) => {
-  function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+const faker = require('faker');
 
-  const orderNumber = getRandomArbitrary(1200000, 2100000);
+export const orderFulfilment = (profile, data, response) => {
+  
   const todayTimestamp = new Date();
   let pricing = 0;
   const orderTimespan = response.result.contexts[1].parameters.timespan;
@@ -15,7 +13,7 @@ export const orderFulfilment = (profile, data, response) => {
 
   const resep = {
     recipient_name: profile.first_name,
-    order_number: orderNumber,
+    order_number: faker.finance.bitcoinAddress,
     currency: 'IDR',
     payment_method: 'Website',
     order_url: 'https://www.kumpul.co/membership/join/',
