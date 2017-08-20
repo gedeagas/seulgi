@@ -83,7 +83,6 @@ export default function engineEnglish(data) {
           messenger.sendTextMessage(senderID, `${speech} ${userProfile.first_name}`);
           messenger.sendImageMessage(senderID, 'https://68.media.tumblr.com/69a5c69c36489d90d9838850f5668af6/tumblr_ou0embggVR1ssnf1qo6_250.gif');
           messenger.sendReceiptMessage(senderID, resep);
-          
         });
       } else {
         messenger.sendTextMessage(senderID, response.result.fulfillment.speech);
