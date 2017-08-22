@@ -4,8 +4,12 @@ import orderResolver from '../intentresolver/order';
 const apiai = require('apiai');
 const FBMessenger = require('fb-messenger');
 
+const mqtt = require('mqtt');
+
+const client = mqtt.connect('mqtt://45.32.115.11');
+
 const messenger = new FBMessenger(PAGE_ACCESS_TOKEN);
-const app = apiai('73f11a6d692146bdb9708b4e434e7ec9');
+const app = apiai('525094bfeb3545c3aa54f53a2ea74bd7');
 
 export default function engineEnglish(data) {
   const senderID = data.sender.id;
@@ -27,6 +31,20 @@ export default function engineEnglish(data) {
 
   request.on('response', (response) => {
     if (isDefined(response.result) && isDefined(response.result.fulfillment)) {
+      if (response.result.action === 'lampu') {
+        const speech = response.result.fulfillment.speech;
+        messenger.sendTextMessage(senderID, `${speech}`);
+        client.on('connect', () => {
+          client.subscribe('lampu');
+          if (response.result.parameters.status === 'matikan') {
+            client.publish('lampu', 'off');
+            client.end();
+          } else {
+            client.publish('lampu', 'on');
+            client.end();
+          }
+        });
+      }
       if (response.result.action === 'transactionorder.transactionorder-custom.transactionorder-whichone-yes') {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
