@@ -38,9 +38,11 @@ export default function engineEnglish(data) {
           if (response.result.parameters.status === 'matikan') {
             client.publish('lampu', 'off');
             messenger.sendTextMessage(senderID, `${speech}`);
+            console.log('trigger off');
           } else {
             client.publish('lampu', 'on');
             messenger.sendTextMessage(senderID, `${speech}`);
+            console.log('trigger on');
           }
         });
 
