@@ -16,7 +16,7 @@ export const handlerEngine = (data) => {
   const pageID = data.recipient.id;
   const timeOfMessage = data.timestamp;
   const message = data.message;
-  let userProfile = '';
+  const userProfile = '';
 
   const readableMessage = message.text;
   const lang = franc(readableMessage, { minLength: 3, whitelist: ['eng', 'ind'] });
@@ -24,14 +24,7 @@ export const handlerEngine = (data) => {
   console.log('[receivedMessage] user (%d) page (%d) timestamp (%d) and message (%s)',
     senderID, pageID, timeOfMessage, JSON.stringify(message));
 
-  if (lang === 'eng') {
-    engineEngilish(data);
-  } else if (lang === 'ind') {
-    messenger.getProfile(senderID, (err, body) => {
-      userProfile = body;
-      messenger.sendTextMessage(senderID, `Maaf ${userProfile.first_name}, bahasa indonesia ku belum bagus`);
-    });
-  }
+  engineEngilish(data);
 };
 
 export default handlerEngine;
