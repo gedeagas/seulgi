@@ -33,19 +33,23 @@ export default function engineEnglish(data) {
     if (isDefined(response.result) && isDefined(response.result.fulfillment)) {
       if (response.result.action === 'lampu') {
         const speech = response.result.fulfillment.speech;
-        messenger.sendTextMessage(senderID, `${speech}`);
         client.on('connect', () => {
           client.subscribe('lampu');
           if (response.result.parameters.status === 'matikan') {
             client.publish('lampu', 'off');
-            client.end();
+            messenger.sendTextMessage(senderID, `${speech}`);
           } else {
             client.publish('lampu', 'on');
-            client.end();
+            messenger.sendTextMessage(senderID, `${speech}`);
           }
         });
-      }
-      if (response.result.action === 'transactionorder.transactionorder-custom.transactionorder-whichone-yes') {
+
+        client.on('message', (topic, message) => {
+          // message is Buffer
+          console.log(message.toString());
+          client.end();
+        });
+      } else if (response.result.action === 'transactionorder.transactionorder-custom.transactionorder-whichone-yes') {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
           const speech = response.result.fulfillment.speech;
