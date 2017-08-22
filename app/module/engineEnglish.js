@@ -47,7 +47,6 @@ export default function engineEnglish(data) {
           messenger.sendTextMessage(senderID, `${speech}`);
           console.log('trigger on');
         }
-        messenger.sendTextMessage(senderID, `${speech}`);
       } else if (response.result.action === 'transactionorder.transactionorder-custom.transactionorder-whichone-yes') {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
