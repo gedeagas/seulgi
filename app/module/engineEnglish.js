@@ -11,6 +11,11 @@ const client = mqtt.connect('mqtt://45.32.115.11');
 const messenger = new FBMessenger(PAGE_ACCESS_TOKEN);
 const app = apiai('525094bfeb3545c3aa54f53a2ea74bd7');
 
+client.on('connect', () => {
+  client.subscribe('lampu');
+});
+
+
 export default function engineEnglish(data) {
   const senderID = data.sender.id;
   const request = app.textRequest(data.message.text, {
@@ -33,24 +38,16 @@ export default function engineEnglish(data) {
     if (isDefined(response.result) && isDefined(response.result.fulfillment)) {
       if (response.result.action === 'lampu') {
         const speech = response.result.fulfillment.speech;
-        client.on('connect', () => {
-          client.subscribe('lampu');
-          if (response.result.parameters.status === 'matikan') {
-            client.publish('lampu', 'off');
-            messenger.sendTextMessage(senderID, `${speech}`);
-            console.log('trigger off');
-          } else {
-            client.publish('lampu', 'on');
-            messenger.sendTextMessage(senderID, `${speech}`);
-            console.log('trigger on');
-          }
-        });
-
-        client.on('message', (topic, message) => {
-          // message is Buffer
-          console.log(message.toString());
-          client.end();
-        });
+        if (response.result.parameters.status === 'matikan') {
+          client.publish('lampu', 'off');
+          messenger.sendTextMessage(senderID, `${speech}`);
+          console.log('trigger off');
+        } else {
+          client.publish('lampu', 'on');
+          messenger.sendTextMessage(senderID, `${speech}`);
+          console.log('trigger on');
+        }
+        messenger.sendTextMessage(senderID, `${speech}`);
       } else if (response.result.action === 'transactionorder.transactionorder-custom.transactionorder-whichone-yes') {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
