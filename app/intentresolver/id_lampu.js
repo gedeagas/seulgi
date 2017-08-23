@@ -12,8 +12,8 @@ export const idLampuFulfilment = (profile, data, response) => {
     client.publish('lampu', 'off');
     action = 'dimatikan';
   }
-  const device = response.entities.iot_things.value;
-  const place = response.entities.iot_place.value;
+  const device = response.entities.iot_things[0].value;
+  const place = response.entities.iot_place[0].value;
   const returnSpeech = `${profile.first_name}, ${device} ${place} sudah aku ${action}`;
   return returnSpeech;
 };
