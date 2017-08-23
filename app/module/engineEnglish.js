@@ -9,7 +9,7 @@ const mqtt = require('mqtt');
 const client = mqtt.connect('mqtt://45.32.115.11');
 
 const messenger = new FBMessenger(PAGE_ACCESS_TOKEN);
-const app = apiai('525094bfeb3545c3aa54f53a2ea74bd7');
+const app = apiai('73f11a6d692146bdb9708b4e434e7ec9');
 
 client.on('connect', () => {
   client.subscribe('lampu');
