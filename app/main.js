@@ -27,9 +27,7 @@ export const processor = (req, res) => {
       pageEntry.messaging.forEach((messagingEvent) => {
         const propertyNames = [];
         for (const prop in messagingEvent) { propertyNames.push(prop); }
-
         console.log('[app.post] Webhook received a messagingEvent with properties: ', propertyNames.join());
-
         if (messagingEvent.message) {
           // someone sent a message
           handlerEngine(messagingEvent);

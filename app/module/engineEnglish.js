@@ -41,21 +41,21 @@ export default function engineEnglish(data) {
         if (response.result.parameters.status === 'matikan') {
           client.publish('lampu', 'off');
           messenger.sendTextMessage(senderID, `${speech}`);
-          console.log('trigger off');
+          // console.log('trigger off');
         } else {
           client.publish('lampu', 'on');
           messenger.sendTextMessage(senderID, `${speech}`);
-          console.log('trigger on');
+          // console.log('trigger on');
         }
       } else if (response.result.action === 'transactionorder.transactionorder-custom.transactionorder-whichone-yes') {
         messenger.getProfile(senderID, (err, body) => {
           const userProfile = body;
           const speech = response.result.fulfillment.speech;
-          console.log(orderResolver(userProfile, data, response));
+          // console.log(orderResolver(userProfile, data, response));
           messenger.sendTextMessage(senderID, `Okay ${userProfile.first_name}, ${speech}`);
           messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response), (err, databody) => {
             if (err) return console.error(err);
-            console.log(databody);
+            // console.log(databody);
           });
         });
       } else if (response.result.metadata.intentName === 'smalltalk.agent.beautiful') {
