@@ -1,9 +1,9 @@
 /*
  * Copyright 2017-present, Facebook, Inc.
- * 
+ *
  * Agastya Darma Laksana
- * 
- * 
+ *
+ *
  * All rights reserved.
  *
  * This source code is licensed under the license found in the
@@ -11,11 +11,11 @@
  *
  */
 
+const handlerEngine = require('./module/handler');
 
-import handlerEngine from './module/handler';
-
-export const processor = (req, res) => {
+const processor = (req, res) => {
   const data = req.body;
+  console.log('[DEBUG] data', data);
   // Make sure this is a page subscription
   if (data.object === 'page') {
     // entries may be batched so iterate over each one
@@ -39,10 +39,10 @@ export const processor = (req, res) => {
 
     // Assume all went well.
     //
-    // You must send back a 200, within 20 seconds, to let us know you've 
+    // You must send back a 200, within 20 seconds, to let us know you've
     // successfully received the callback. Otherwise, the request will time out.
     res.sendStatus(200);
   }
 };
 
-export default processor;
+module.exports = processor;

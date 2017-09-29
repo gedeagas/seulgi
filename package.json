@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node server.js --presets es2015,stage-2"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "Intent",
@@ -20,6 +20,7 @@
     "babel-register": "^6.26.0",
     "body-parser": "^1.17.2",
     "config": "^1.26.2",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
     "faker": "^4.1.0",
@@ -47,6 +48,7 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.4.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.12.1"
   }
 }

@@ -1,18 +1,18 @@
 const faker = require('faker');
 
-export const orderFulfilment = (profile, data, response) => {
-  const todayTimestamp = Math.floor(new Date() / 1000);
+const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
+
+const orderFulfilment = (profile, data, response) => {
   let pricing = 0;
+  const todayTimestamp = Math.floor(new Date() / 1000);
   const orderTimespan = response.result.contexts[1].parameters.timespan;
+
   if (orderTimespan === 'daily') {
     pricing = 200000;
   } if (orderTimespan === 'weekly') {
     pricing = 1000000;
   } else {
     pricing = 2600000;
-  }
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   const resep = {
@@ -47,7 +47,8 @@ export const orderFulfilment = (profile, data, response) => {
       },
     ],
   };
+
   return resep;
 };
 
-export default orderFulfilment;
+module.exports = orderFulfilment;

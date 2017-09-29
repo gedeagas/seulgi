@@ -1,3 +1,6 @@
 node_modules/
 .vimrc.local
 .editorconfig
+.env
+yarn-error.log
+npm-error.log

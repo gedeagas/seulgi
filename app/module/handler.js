@@ -1,9 +1,9 @@
-import engineEngilish from './engineEnglish';
-import engineIndonesian from './engineIndonesian';
+const engineEngilish = require('./engineEnglish');
+const engineIndonesian = require('./engineIndonesian');
 
 const franc = require('franc');
 
-export const handlerEngine = (data) => {
+const handlerEngine = (data) => {
   const senderID = data.sender.id;
   const pageID = data.recipient.id;
   const timeOfMessage = data.timestamp;
@@ -22,4 +22,4 @@ export const handlerEngine = (data) => {
   }
 };
 
-export default handlerEngine;
+module.exports = handlerEngine;
