@@ -1,10 +1,9 @@
-import { PAGE_ACCESS_TOKEN } from './token';
-import orderResolver from '../intentresolver/order';
-
 const apiai = require('apiai');
 const FBMessenger = require('fb-messenger');
-
 const mqtt = require('mqtt');
+
+const { PAGE_ACCESS_TOKEN } = require('./token');
+const orderResolver = require('../intentresolver/order');
 
 const client = mqtt.connect('mqtt://45.32.115.11');
 
@@ -15,8 +14,7 @@ client.on('connect', () => {
   client.subscribe('lampu');
 });
 
-
-export default function engineEnglish(data) {
+const engineEnglish = (data) => {
   const senderID = data.sender.id;
   const request = app.textRequest(data.message.text, {
     sessionId: senderID,
@@ -53,8 +51,8 @@ export default function engineEnglish(data) {
           const speech = response.result.fulfillment.speech;
           // console.log(orderResolver(userProfile, data, response));
           messenger.sendTextMessage(senderID, `Okay ${userProfile.first_name}, ${speech}`);
-          messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response), (err, databody) => {
-            if (err) return console.error(err);
+          messenger.sendReceiptMessage(senderID, orderResolver(userProfile, data, response), (errSendReceipt, databody) => {
+            if (errSendReceipt) return console.error(errSendReceipt);
             // console.log(databody);
           });
         });
@@ -71,8 +69,12 @@ export default function engineEnglish(data) {
       }
     }
   });
+
   request.on('error', (error) => {
     console.log(error);
   });
+
   request.end();
-}
+};
+
+module.exports = engineEnglish;

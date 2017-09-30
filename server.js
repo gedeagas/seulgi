@@ -1,9 +1,9 @@
 /*
  * Copyright 2017-present, Facebook, Inc.
- * 
+ *
  * Agastya Darma Laksana
- * 
- * 
+ *
+ *
  * All rights reserved.
  *
  * This source code is licensed under the license found in the
@@ -11,16 +11,19 @@
  *
  */
 
-/* jshint node: true, devel: true */
-// importing dependency 
-import processor from './app/main';
-import verifyRequestSignature from './app/service/verifyRequestSignature';
-import { VALIDATION_TOKEN } from './app/module/token';
+// load all env config
+require('dotenv').config();
 
+// importing dependency
 const bodyParser = require('body-parser');
 const express = require('express');
 
+const processor = require('./app/main');
+const verifyRequestSignature = require('./app/service/verifyRequestSignature');
+const { VALIDATION_TOKEN } = require('./app/module/token');
+
 const app = express();
+
 app.set('port', process.env.PORT || 1263);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
@@ -29,11 +32,10 @@ app.use(express.static('public'));
 
 /*
  * This function is only for webhook verification
- * Use your own validation token. Check that the token used in the Webhook 
+ * Use your own validation token. Check that the token used in the Webhook
  * setup is the same token used here.
  *
  */
-
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === VALIDATION_TOKEN) {
@@ -56,7 +58,7 @@ app.post('/webhook', processor);
 
 /*
  * Start server
- * Webhooks must be available via SSL with a certificate signed by a valid 
+ * Webhooks must be available via SSL with a certificate signed by a valid
  * certificate authority.
  */
 app.listen(app.get('port'), () => {
