@@ -11,9 +11,6 @@
  *
  */
 
-// load all env config
-require('dotenv').config();
-
 // importing dependency
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -29,7 +26,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.use(express.static('public'));
 
-
 /*
  * This function is only for webhook verification
  * Use your own validation token. Check that the token used in the Webhook
@@ -37,8 +33,7 @@ app.use(express.static('public'));
  *
  */
 app.get('/webhook', (req, res) => {
-  if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] === VALIDATION_TOKEN) {
+  if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === VALIDATION_TOKEN) {
     console.log('[app.get] Validating webhook');
     res.status(200).send(req.query['hub.challenge']);
   } else {
@@ -47,14 +42,12 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-
 /*
 *
 * All facebook messenger incoming chat will be handled here
 *
 */
 app.post('/webhook', processor);
-
 
 /*
  * Start server
@@ -64,4 +57,3 @@ app.post('/webhook', processor);
 app.listen(app.get('port'), () => {
   console.log('[app.listen] Node app is running on port', app.get('port'));
 });
-
